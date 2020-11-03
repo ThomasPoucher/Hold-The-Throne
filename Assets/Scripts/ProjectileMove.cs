@@ -94,25 +94,44 @@ public class ProjectileMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.layer == 9)
+        
+        var collisionObject = collision.contacts[0].collider.gameObject;
+        Debug.Log(collisionObject.layer + " collision total " + collision.contactCount);
+        if (collisionObject.gameObject.layer == 18)
         {
-            collision.gameObject.GetComponent<PlayerMovement>().DamageTimer(transform.position);
+            var audio = collisionObject.gameObject.GetComponent<AudioSource>();
+            if(!audio.isPlaying)
+            {
+                audio.Play();
+            }
+            timesWrapped++;
+            if(timesWrapped > 1)
+            {
+                Destroy(gameObject);
+            }
+        }
+        if (collisionObject.gameObject.layer == 9)
+        {
+            collisionObject.gameObject.GetComponent<PlayerMovement>().DamageTimer(transform.position);
             Destroy(gameObject);
         }
-        if (gameObject.layer != 16 && (collision.gameObject.layer == 11 || collision.gameObject.layer == 16))
+        if (gameObject.layer != 16 && (collisionObject.gameObject.layer == 11 || collisionObject.gameObject.layer == 16))
         {
-            if (collision.gameObject.GetComponent<Walker>() != null && collision.gameObject.GetComponent<Walker>().CanDamage)
+            if (collisionObject.gameObject.GetComponent<Walker>() != null && collisionObject.gameObject.GetComponent<Walker>().CanDamage)
             {
-                collision.gameObject.GetComponent<Walker>().DamageTimer();
+                collisionObject.gameObject.GetComponent<Walker>().DamageTimer();
             }
             Destroy(gameObject);    
         }
-        if (gameObject.layer != 16 && (collision.gameObject.layer == 14))
+        if (gameObject.layer != 16 && (collisionObject.gameObject.layer == 14))
         {
-            if (collision.gameObject.GetComponent<MoveAttackScript>() != null && collision.gameObject.GetComponent<MoveAttackScript>().CanDamage)
+            if (collisionObject.gameObject.GetComponent<Knight>() != null && collisionObject.gameObject.GetComponent<Knight>().CanDamage)
             {
-                collision.gameObject.GetComponent<MoveAttackScript>().DamageTimer();
+                collisionObject.gameObject.GetComponent<Knight>().DamageTimer();
+            }
+            if (collisionObject.gameObject.GetComponent<MoveAttackScript>() != null && collisionObject.gameObject.GetComponent<MoveAttackScript>().CanDamage)
+            {
+                collisionObject.gameObject.GetComponent<MoveAttackScript>().DamageTimer();
             }
             Destroy(gameObject);
         }

@@ -28,7 +28,11 @@ public class PlayerMovement : MonoBehaviour
             var score = GameObject.FindGameObjectWithTag("ScoreManager");
             score.GetComponent<Timer>().CamPosition = Mathf.RoundToInt(Camera.main.transform.position.x);
             score.GetComponent<Timer>().CalculateScore();
-            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            SceneChanger.LoadScene("GameOver");
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneChanger.LoadScene("MainMenu");
         }
     }
     // Update is called once per frame

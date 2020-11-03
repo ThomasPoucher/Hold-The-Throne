@@ -55,14 +55,15 @@ public class Walker : MonoBehaviour
     }
     void OnWillRenderObject()
     {
-        //Debug.Log("Camera current is " + Camera.current);
         if (CameraEx.IsObjectVisible(Camera.main, GetComponent<SpriteRenderer>()))
         {
-           // if (Camera.current.tag == "MainCamera" && !IsOnScreen)
-        //    {
-                canMove = true;
-                IsOnScreen = true;
-          //  }
+            canMove = true;
+            IsOnScreen = true;
+        }
+        else
+        {
+            canMove = false;
+            IsOnScreen = false;
         }
      }
     IEnumerator MoveFor()
@@ -72,9 +73,10 @@ public class Walker : MonoBehaviour
     }
     public void DamageTimer()
     {
-        GetComponent<AudioSource>().Play();
+   
         if (CanDamage && IsOnScreen)
         {
+            GetComponent<AudioSource>().Play();
             StartCoroutine(Damage());
         }
     }
@@ -90,12 +92,12 @@ public class Walker : MonoBehaviour
             }
             else
             {
-                if (gameObject.name == "Boss")
+                if (gameObject.name == "Boss" || gameObject.name == "SewerBoss")
                 {
                     score.GetComponent<Timer>().HealthRemaining = player.GetComponent<PlayerMovement>().Health;
                     score.GetComponent<Timer>().CamPosition = Mathf.RoundToInt(Camera.main.transform.position.x);
                     score.GetComponent<Timer>().CalculateScore();
-                    SceneManager.LoadScene("WinScreen");
+                    SceneChanger.LoadScene("WinScreen");
                 }
                 else
                 {

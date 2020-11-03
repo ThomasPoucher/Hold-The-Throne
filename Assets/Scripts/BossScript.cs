@@ -61,13 +61,6 @@ public class BossScript : MonoBehaviour
                 break;
         }
     }
-    IEnumerator WaitFor(Action act, float seconds)
-    {
-        Debug.Log("Started");
-        yield return new WaitForSeconds(seconds);
-        Debug.Log("Ended");
-        act.Invoke();
-    }
     IEnumerator ResetState(float seconds)
     {
         yield return new WaitForSeconds(seconds);

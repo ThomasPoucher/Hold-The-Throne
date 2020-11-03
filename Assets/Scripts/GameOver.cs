@@ -19,11 +19,11 @@ public class GameOver : MonoBehaviour
 
     public void Exit()
     {
-        SceneManager.LoadScene("MainMenu",LoadSceneMode.Single);
+        SceneChanger.LoadScene("MainMenu");
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+        SceneChanger.LoadPreviousScene();
     }
 }

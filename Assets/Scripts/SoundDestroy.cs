@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class WinScreen : MonoBehaviour
+public class SoundDestroy : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,9 +13,9 @@ public class WinScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if (!GetComponent<AudioSource>().isPlaying)
         {
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            Destroy(gameObject);
         }
     }
 }

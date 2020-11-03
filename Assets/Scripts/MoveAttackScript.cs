@@ -35,7 +35,15 @@ public class MoveAttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CanMove)
+        if (player.transform.position.x < transform.position.x)
+        {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+        else if (player.transform.position.x > transform.position.x)
+        {
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        }
+        if (CanMove)
         {
             GetComponent<Rigidbody2D>().MovePosition(transform.position - ((transform.position - player.transform.position) * Time.deltaTime * Speed));
         }
@@ -45,10 +53,10 @@ public class MoveAttackScript : MonoBehaviour
         GetComponent<AudioSource>().Play();
         if (CanDamage && IsOnScreen)
         {
-            StartCoroutine(Damage());
+            StartCoroutine(Damage(0.3f));
         }
     }
-    IEnumerator Damage()
+    IEnumerator Damage(float timeToDie)
     {
         if (CanDamage)
         {
@@ -58,7 +66,7 @@ public class MoveAttackScript : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                Destroy(gameObject, timeToDie);
             }
             CanDamage = false;
             GetComponent<SpriteRenderer>().material = damageMaterial;
