@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
             score.GetComponent<Timer>().CalculateScore();
             SceneChanger.LoadScene("GameOver");
         }
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Backspace))
         {
             SceneChanger.LoadScene("MainMenu");
         }

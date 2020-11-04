@@ -52,6 +52,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -154,6 +155,8 @@ MonoBehaviour:
   IsOnScreen: 0
   MoveTime: 1.5
   DamageNoise: {fileID: 8300000, guid: 7d0f592a5c56dbc4eab0d5b630edcc93, type: 3}
+  player: {fileID: 0}
+  score: {fileID: 0}
 --- !u!82 &-1021879293054066118
 AudioSource:
   m_ObjectHideFlags: 0
@@ -166,7 +169,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.675
+  m_Volume: 0.38
   m_Pitch: 1
   Loop: 0
   Mute: 0

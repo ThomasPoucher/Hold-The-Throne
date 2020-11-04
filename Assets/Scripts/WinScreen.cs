@@ -14,7 +14,7 @@ public class WinScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if(Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Backspace))
         {
             SceneChanger.LoadScene("MainMenu");
         }

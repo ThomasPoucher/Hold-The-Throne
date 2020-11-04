@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene")
+        if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "Level2")
         {
             timer += Time.deltaTime;
             string output = String.Format("Time: {0:0}", timer);
