@@ -14,8 +14,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     public Material startMaterial;
 
-    //  private Vector3
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,19 +36,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-  
-      
         var hor = Input.GetAxis("Horizontal");
         var ver = Input.GetAxis("Vertical");
-        // var camPos =   transform.position - ;
-        //  Debug.Log(hor + " , " + ver);
-
-        var moveAmount = new Vector2(hor, ver) * Time.deltaTime * Speed;// (Speed + );
-      //  var move = new Vector2(transform.position.x + moveAmount.x, transform.position.y + moveAmount.y);
-       // Debug.Log(move);
-        //   transform.parent.TransformPoint(move)
+        var moveAmount = new Vector2(hor, ver) * Time.deltaTime * Speed;
         GetComponent<Rigidbody2D>().velocity = Camera.main.GetComponent<Rigidbody2D>().velocity + moveAmount;
-      //  GetComponent<Rigidbody2D>().MovePosition(move); // = Vector3.Lerp(transform.position,new Vector3(transform.position.x + hor, transform.position.y + ver,0),1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -85,9 +74,7 @@ public class PlayerMovement : MonoBehaviour
             Color current = GetComponent<SpriteRenderer>().color;
             current.a = 100;
             GetComponent<SpriteRenderer>().color = current;
-            //    Debug.Log("Bye");
             yield return new WaitForSeconds(1.0f);
-            //   Debug.Log("Hello");
             GetComponent<SpriteRenderer>().material = startMaterial;
             current.a = 255;
             GetComponent<SpriteRenderer>().color = current;

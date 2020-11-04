@@ -35,7 +35,6 @@ public class BossScript : MonoBehaviour
         Debug.Log("State is " + BossState);
         animator.SetInteger(nameof(BossState), BossState);
         ready = false;
-      //  finishedShooting = true;
         switch (BossState)
         {
             case (0):
@@ -68,7 +67,6 @@ public class BossScript : MonoBehaviour
             {
                 if(!hasSetMusic)
             {
-              //  Camera.main.GetComponent<AudioSource>().pitch = -1f;
                 hasSetMusic = true;
             }
                 PickNewState();
@@ -86,7 +84,6 @@ public class BossScript : MonoBehaviour
             StopCoroutine(SpawnBats());
             StartCoroutine(LaserProjectile());
         }
-        // StartCoroutine(WaitFor(2f));
     }
     void Shoot()
     {
@@ -97,7 +94,6 @@ public class BossScript : MonoBehaviour
             StopCoroutine(SpawnBats());
             StartCoroutine(ThrowProjectile());
         }
-        //StartCoroutine(WaitFor(2f));
     }
     void Spawn()
     {
@@ -119,7 +115,6 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         var item1 = Instantiate(bats, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        // var vectorToUse = transform.up;
         item1.GetComponent<Rigidbody2D>().AddForce(-item1.gameObject.transform.up, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.3f);
         var item2 = Instantiate(bats, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -127,60 +122,34 @@ public class BossScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         var item3 = Instantiate(bats, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
         item3.GetComponent<Rigidbody2D>().AddForce(-item2.gameObject.transform.up, ForceMode2D.Impulse);
-        //   finishedShooting = true;
-
     }
     IEnumerator ThrowProjectile()
     {
         yield return new WaitForSeconds(1.0f);
-        //var item1 = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        //// var vectorToUse = transform.up;
-        //item1.GetComponent<Rigidbody2D>().AddForce(-item1.gameObject.transform.right * 0.85f, ForceMode2D.Impulse);
         var item2 = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 25)));
         item2.GetComponent<Rigidbody2D>().AddForce(-item2.gameObject.transform.right * 0.75f, ForceMode2D.Impulse);
         var item3 = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, -25)));
         item3.GetComponent<Rigidbody2D>().AddForce(-item3.gameObject.transform.right * 0.75f, ForceMode2D.Impulse);
-        //yield return new WaitForSeconds(1.0f);
-        //var item1 = Instantiate(projectile, transform.position , Quaternion.Euler(new Vector3(0, 0, 0)));
-        //// var vectorToUse = transform.up;
-        //item1.GetComponent<Rigidbody2D>().AddForce(-item1.gameObject.transform.up, ForceMode2D.Impulse);
-        //var item2 = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        //item2.GetComponent<Rigidbody2D>().AddForce(-item2.gameObject.transform.up, ForceMode2D.Impulse);
-        //var item3 = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        //item3.GetComponent<Rigidbody2D>().AddForce(-item2.gameObject.transform.up, ForceMode2D.Impulse);
-        ////   finishedShooting = true;
-
     }
     IEnumerator LaserProjectile()
     {
-        //if(!finishedShooting)
-        //{
-        //    yield return null;
-        //}
-        //else
-        //{
-          //  finishedShooting = false;
-            yield return new WaitForSeconds(0.3f);
-            var dir = player.GetComponent<Rigidbody2D>().position - (GetComponent<Rigidbody2D>().position + new Vector2(0, 1));
-            Debug.Log("Dir " + dir);
-            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, dir);
-            var item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
-            item1.GetComponent<Rigidbody2D>().AddForce(item1.transform.up, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.3f);
-         dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
-       
-         rotation = Quaternion.LookRotation(Vector3.forward, dir);
-         item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
+        var dir = player.GetComponent<Rigidbody2D>().position - (GetComponent<Rigidbody2D>().position + new Vector2(0, 1));
+        Debug.Log("Dir " + dir);
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, dir);
+        var item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
         item1.GetComponent<Rigidbody2D>().AddForce(item1.transform.up, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.3f);
-         dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
+        dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
        
-         rotation = Quaternion.LookRotation(Vector3.forward, dir);
-         item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
+        rotation = Quaternion.LookRotation(Vector3.forward, dir);
+        item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
         item1.GetComponent<Rigidbody2D>().AddForce(item1.transform.up, ForceMode2D.Impulse);
-        // finishedShooting = true;
-        // }
-
-
+        yield return new WaitForSeconds(0.3f);
+        dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
+       
+        rotation = Quaternion.LookRotation(Vector3.forward, dir);
+        item1 = Instantiate(laserProjectile, transform.position + new Vector3(0, 1, 0), rotation);
+        item1.GetComponent<Rigidbody2D>().AddForce(item1.transform.up, ForceMode2D.Impulse);
     }
 }

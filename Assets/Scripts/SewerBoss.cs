@@ -50,8 +50,7 @@ public class SewerBoss : MonoBehaviour
         {
             return;
         }
-       // GetComponent<Walker>().enabled = false;
-   
+
         ready = true;
         StopCoroutine(SpawnRats());
         StopCoroutine(AttackPlayer());
@@ -97,13 +96,16 @@ public class SewerBoss : MonoBehaviour
         }
         else if (hasActivated && attacking)
         {
+            var newPos = GameObject.FindGameObjectWithTag("SpawnWall");
+            transform.position = newPos.transform.position;
             ready = false;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            transform.position = new Vector3(Camera.main.transform.position.x + 10f, spawnPoint.y, spawnPoint.z);
             attacking = false;
+            hasActivated = false;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<CircleCollider2D>().isTrigger = false;
             StopCoroutine(AttackPlayer());
-            animator.SetInteger(nameof(BossState), 0);
+            BossState = 0;
+            animator.SetInteger(nameof(BossState), BossState);
         }
         StartCoroutine(ResetState(seconds));
     }
@@ -131,7 +133,6 @@ public class SewerBoss : MonoBehaviour
         Instantiate(WhooshSound);
         attacking = true;
         GetComponent<CircleCollider2D>().isTrigger = true;
-        //  GetComponent<Walker>().enabled = false;
         yield return new WaitForSeconds(3.5f);
 
     }
